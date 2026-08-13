@@ -1,7 +1,7 @@
 ﻿
 namespace JogoCorrida
 {
-    internal class Jogo
+    public class Jogo
     {
 
         public Elemento Carro { get; set; }
@@ -22,9 +22,9 @@ namespace JogoCorrida
             Carro = new Elemento();
             Carro.Tipo = TipoElemento.Carro;
             Carro.PosicaoX = PosicionaObjeto(1);
-            Carro.PosicaoY = YMaximo - 10;
+            Carro.PosicaoY = YMaximo - 1;
 
-            Obstaculos = FabricaObstaculos(3, 10, 50);
+            Obstaculos = FabricaObstaculos(3, 3, 6);
         }
         public List<Elemento> FabricaObstaculos(int qtd, int dmin, int dmax)
         {
@@ -34,13 +34,17 @@ namespace JogoCorrida
 
             for(int i = 0; i < qtd; i++)
             {
-                if (i != 0) {
-                    var ob = new Elemento();
-                    ob.Tipo = TipoElemento.Obstaculo;
-                    var faixa = rnd.Next(1, 2);
-                    ob.PosicaoX = PosicionaObjeto(faixa);
-                    ob.PosicaoY = y_incial;
-                    }
+                if (i != 0) 
+                    y_incial -= rnd.Next(dmin, dmax);
+                var ob = new Elemento()
+                {
+                    Tipo = TipoElemento.Obstaculo
+                };
+                var faixa = rnd.Next(1, 3);
+                ob.PosicaoX = PosicionaObjeto(faixa);
+                ob.PosicaoY = y_incial;
+                obstaculos.Add(ob);
+                
             }
             return obstaculos;
 
@@ -63,7 +67,7 @@ namespace JogoCorrida
         private int ChecaFaixaElemento(Elemento elemento)
         {
             if(elemento.PosicaoX >= Faixa1Inicio && 
-                elemento.PosicaoY <= Faixa1Fim)
+                elemento.PosicaoX <= Faixa1Fim)
             {
                 return 1;
             }
@@ -78,12 +82,24 @@ namespace JogoCorrida
             {
                 if(ChecaFaixaElemento(Carro) == ChecaFaixaElemento(ob))
                 {
-                    if(Math.Abs(Carro.PosicaoY - ob.PosicaoY) <= 10){
+                    if(Math.Abs(Carro.PosicaoY - ob.PosicaoY) == 0){
                         return true;
                     }
                 }
             }
             return false;
+        }
+
+        public void MovimentaObstaculos()
+        {
+            foreach (var ob in Obstaculos)
+            {
+                ob.PosicaoY ++;
+                if(ob.PosicaoY > YMaximo)
+                {
+                    ob.PosicaoY = 0;
+                }
+            }
         }
         public bool VerificaFimJogo()
         {
