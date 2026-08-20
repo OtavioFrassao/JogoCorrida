@@ -28,34 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormJogoCorrida));
             picCarro = new PictureBox();
-            picObstaculo = new PictureBox();
+            timerJogo = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)picCarro).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)picObstaculo).BeginInit();
             SuspendLayout();
             // 
             // picCarro
             // 
             picCarro.BackColor = Color.Transparent;
-            picCarro.Image = (Image)resources.GetObject("picCarro.Image");
-            picCarro.Location = new Point(263, 492);
+            picCarro.BackgroundImage = (Image)resources.GetObject("picCarro.BackgroundImage");
+            picCarro.BackgroundImageLayout = ImageLayout.Stretch;
+            picCarro.Location = new Point(252, 346);
             picCarro.Name = "picCarro";
-            picCarro.Size = new Size(127, 122);
-            picCarro.SizeMode = PictureBoxSizeMode.StretchImage;
-            picCarro.TabIndex = 0;
+            picCarro.Size = new Size(95, 103);
+            picCarro.TabIndex = 2;
             picCarro.TabStop = false;
             // 
-            // picObstaculo
+            // timerJogo
             // 
-            picObstaculo.BackColor = Color.Transparent;
-            picObstaculo.BackgroundImage = (Image)resources.GetObject("picObstaculo.BackgroundImage");
-            picObstaculo.BackgroundImageLayout = ImageLayout.Stretch;
-            picObstaculo.Location = new Point(51, 84);
-            picObstaculo.Name = "picObstaculo";
-            picObstaculo.Size = new Size(100, 105);
-            picObstaculo.TabIndex = 1;
-            picObstaculo.TabStop = false;
+            timerJogo.Tick += timerJogo_Tick;
             // 
             // FormJogoCorrida
             // 
@@ -63,23 +56,20 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(415, 626);
-            Controls.Add(picObstaculo);
+            ClientSize = new Size(384, 511);
             Controls.Add(picCarro);
             Name = "FormJogoCorrida";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "JogoCorrida - IFSP";
-            Load += Form1_Load;
+            Load += FormJogoCorrida_Load;
+            KeyDown += FormJogoCorrida_KeyDown;
             ((System.ComponentModel.ISupportInitialize)picCarro).EndInit();
-            ((System.ComponentModel.ISupportInitialize)picObstaculo).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private PictureBox pictureBox1;
         private PictureBox pictureBox2;
         private PictureBox picCarro;
-        private PictureBox picObstaculo;
+        private System.Windows.Forms.Timer timerJogo;
     }
 }

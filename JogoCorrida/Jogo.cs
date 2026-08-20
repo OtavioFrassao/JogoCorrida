@@ -22,9 +22,9 @@ namespace JogoCorrida
             Carro = new Elemento();
             Carro.Tipo = TipoElemento.Carro;
             Carro.PosicaoX = PosicionaObjeto(1);
-            Carro.PosicaoY = YMaximo - 1;
+            Carro.PosicaoY = YMaximo - 100;
 
-            Obstaculos = FabricaObstaculos(3, 3, 6);
+            Obstaculos = FabricaObstaculos(5, 120, 200);
         }
         public List<Elemento> FabricaObstaculos(int qtd, int dmin, int dmax)
         {
@@ -57,7 +57,7 @@ namespace JogoCorrida
             }
             else
             {
-                return Faixa2Inicio + ((Faixa2Inicio - Faixa2Inicio) / 2);
+                return Faixa2Inicio + ((Faixa2Fim - Faixa2Inicio) / 2);
             }
         }
         public void Acelerar(int incremento)
@@ -82,7 +82,7 @@ namespace JogoCorrida
             {
                 if(ChecaFaixaElemento(Carro) == ChecaFaixaElemento(ob))
                 {
-                    if(Math.Abs(Carro.PosicaoY - ob.PosicaoY) == 0){
+                    if(Math.Abs(Carro.PosicaoY - ob.PosicaoY) < 60){
                         return true;
                     }
                 }
@@ -94,7 +94,7 @@ namespace JogoCorrida
         {
             foreach (var ob in Obstaculos)
             {
-                ob.PosicaoY ++;
+                ob.PosicaoY += 10;
                 if(ob.PosicaoY > YMaximo)
                 {
                     ob.PosicaoY = 0;
