@@ -6,13 +6,12 @@ namespace JogoCorrida
 {
     public class Elemento
     {
-
-        //Atributos da classe
+        // Atributos da classe
         public TipoElemento Tipo { get; set; }
-        
-        public int PosicaoX;
 
-        public int PosicaoY;
+        public int PosicaoX { get; set; }
+        public int PosicaoY { get; set; }
+
         public int Altura { get; set; }
         public int Largura { get; set; }
 
@@ -21,6 +20,5 @@ namespace JogoCorrida
             PosicaoX = X;
             PosicaoY = Y;
         }
-
     }
 }
